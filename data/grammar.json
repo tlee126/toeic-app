@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "title": "Gerund and Infinitive",
+    "titleVi": "Danh động từ và động từ nguyên mẫu",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "Một số động từ đi với V-ing, một số động từ đi với to V. Đây là dạng rất hay gặp trong TOEIC Part 5.",
+    "rules": [
+      "avoid + V-ing",
+      "enjoy + V-ing",
+      "finish + V-ing",
+      "decide + to V",
+      "want + to V",
+      "plan + to V",
+      "ask someone + to V",
+      "remember + to V: nhớ làm việc gì",
+      "remember + V-ing: nhớ đã làm việc gì"
+    ],
+    "examples": [
+      {
+        "en": "She decided to apply for the position.",
+        "vi": "Cô ấy quyết định ứng tuyển vị trí đó."
+      },
+      {
+        "en": "We enjoyed working with the new team.",
+        "vi": "Chúng tôi thích làm việc với đội mới."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Subject-Verb Agreement",
+    "titleVi": "Sự hòa hợp giữa chủ ngữ và động từ",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "Động từ phải phù hợp với chủ ngữ số ít hoặc số nhiều. Đây là lỗi rất phổ biến trong TOEIC Part 5.",
+    "rules": [
+      "Chủ ngữ số ít dùng động từ số ít.",
+      "Chủ ngữ số nhiều dùng động từ số nhiều.",
+      "The manager is...",
+      "The employees are...",
+      "Several customers have...",
+      "A new policy applies to..."
+    ],
+    "examples": [
+      {
+        "en": "The manager is attending a meeting.",
+        "vi": "Người quản lý đang tham dự một cuộc họp."
+      },
+      {
+        "en": "Several customers have complained about the delay.",
+        "vi": "Một vài khách hàng đã phàn nàn về sự trì hoãn."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Prepositions of Time",
+    "titleVi": "Giới từ chỉ thời gian",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "Các giới từ như in, on, at, by, for thường xuất hiện trong câu hỏi TOEIC về lịch họp, hạn chót và thời gian.",
+    "rules": [
+      "at + giờ cụ thể",
+      "on + ngày cụ thể",
+      "in + tháng/năm/khoảng thời gian dài",
+      "in + khoảng thời gian: sau bao lâu",
+      "by + hạn chót",
+      "be scheduled for + thời điểm/sự kiện",
+      "before + trước thời điểm nào đó",
+      "after + sau thời điểm nào đó"
+    ],
+    "examples": [
+      {
+        "en": "The meeting starts at 9 a.m.",
+        "vi": "Cuộc họp bắt đầu lúc 9 giờ sáng."
+      },
+      {
+        "en": "The interview is scheduled for Monday morning.",
+        "vi": "Buổi phỏng vấn được lên lịch vào sáng thứ Hai."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Tenses",
+    "titleVi": "Thì trong tiếng Anh",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "TOEIC thường kiểm tra thì dựa vào dấu hiệu thời gian như yesterday, last month, tomorrow, currently, already.",
+    "rules": [
+      "last month / yesterday / ago → quá khứ đơn",
+      "will + V → tương lai đơn",
+      "has/have + V3/ed → hiện tại hoàn thành",
+      "is/am/are + V-ing → hiện tại tiếp diễn",
+      "was/were + V-ing → quá khứ tiếp diễn"
+    ],
+    "examples": [
+      {
+        "en": "The marketing team launched a new campaign last month.",
+        "vi": "Đội marketing đã ra mắt một chiến dịch mới vào tháng trước."
+      },
+      {
+        "en": "The director will review the proposal tomorrow.",
+        "vi": "Giám đốc sẽ xem xét đề xuất vào ngày mai."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Modal Verbs",
+    "titleVi": "Động từ khuyết thiếu",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "Sau các động từ khuyết thiếu như must, should, can, may, will, ta dùng động từ nguyên mẫu không to.",
+    "rules": [
+      "must + V",
+      "should + V",
+      "can + V",
+      "may + V",
+      "will + V",
+      "Không dùng: must to V, should to V"
+    ],
+    "examples": [
+      {
+        "en": "All visitors must wear an identification badge.",
+        "vi": "Tất cả khách tham quan phải đeo thẻ nhận dạng."
+      },
+      {
+        "en": "Employees should follow the new safety guidelines.",
+        "vi": "Nhân viên nên tuân theo hướng dẫn an toàn mới."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Comparatives",
+    "titleVi": "So sánh hơn",
+    "level": "Intermediate",
+    "toeicPart": "Part 5",
+    "summary": "Dạng so sánh hơn thường đi với than. Với tính từ dài, dùng more + adjective. Với tính từ/trạng từ ngắn, thường thêm -er.",
+    "rules": [
+      "short adjective + er + than",
+      "more + long adjective + than",
+      "early → earlier",
+      "efficient → more efficient",
+      "good → better",
+      "bad → worse"
+    ],
+    "examples": [
+      {
+        "en": "This printer is more efficient than the old one.",
+        "vi": "Máy in này hiệu quả hơn máy cũ."
+      },
+      {
+        "en": "The supplier delivered the materials earlier than expected.",
+        "vi": "Nhà cung cấp đã giao nguyên vật liệu sớm hơn dự kiến."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Word Form",
+    "titleVi": "Dạng từ",
+    "level": "Intermediate",
+    "toeicPart": "Part 5",
+    "summary": "TOEIC Part 5 thường kiểm tra danh từ, động từ, tính từ, trạng từ. Cần nhìn vị trí trong câu để chọn dạng từ đúng.",
+    "rules": [
+      "Trước danh từ thường cần tính từ.",
+      "Sau động từ thường cần trạng từ.",
+      "Sau mạo từ a/an/the thường có danh từ hoặc cụm danh từ.",
+      "comfortable + noun",
+      "work efficiently",
+      "make a decision"
+    ],
+    "examples": [
+      {
+        "en": "The hotel offers comfortable accommodations for business travelers.",
+        "vi": "Khách sạn cung cấp chỗ ở thoải mái cho khách đi công tác."
+      },
+      {
+        "en": "The team worked efficiently to finish the project.",
+        "vi": "Nhóm đã làm việc hiệu quả để hoàn thành dự án."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Passive Voice",
+    "titleVi": "Câu bị động",
+    "level": "Intermediate",
+    "toeicPart": "Part 5",
+    "summary": "Câu bị động thường dùng khi chủ ngữ nhận hành động. Trong TOEIC, dạng này xuất hiện nhiều trong thông báo, email và quy định công ty.",
+    "rules": [
+      "be + V3/ed",
+      "is approved",
+      "was delivered",
+      "will be reviewed",
+      "has been changed",
+      "Câu bị động thường nhấn mạnh sự việc hơn là người thực hiện."
+    ],
+    "examples": [
+      {
+        "en": "The schedule has been changed.",
+        "vi": "Lịch trình đã được thay đổi."
+      },
+      {
+        "en": "The proposal will be reviewed tomorrow.",
+        "vi": "Đề xuất sẽ được xem xét vào ngày mai."
+      }
+    ]
+  }
+]

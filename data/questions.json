@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "part": "Part 5",
+    "question": "The manager decided _____ the meeting until Friday.",
+    "options": ["postpone", "postponing", "to postpone", "postponed"],
+    "answer": "to postpone",
+    "explanation": "Sau động từ 'decide' ta dùng 'to V', nên đáp án đúng là 'to postpone'.",
+    "grammarPoint": "Gerund and Infinitive"
+  },
+  {
+    "id": 2,
+    "part": "Part 5",
+    "question": "The employees _____ working on the new project.",
+    "options": ["is", "are", "was", "be"],
+    "answer": "are",
+    "explanation": "Chủ ngữ 'employees' là số nhiều, nên động từ đúng là 'are'.",
+    "grammarPoint": "Subject-Verb Agreement"
+  },
+  {
+    "id": 3,
+    "part": "Part 5",
+    "question": "The report is due _____ Friday.",
+    "options": ["in", "on", "at", "for"],
+    "answer": "on",
+    "explanation": "Với ngày cụ thể như Friday, ta dùng giới từ 'on'.",
+    "grammarPoint": "Prepositions of Time"
+  },
+  {
+    "id": 4,
+    "part": "Part 5",
+    "question": "She enjoys _____ with international clients.",
+    "options": ["work", "working", "to work", "worked"],
+    "answer": "working",
+    "explanation": "Sau động từ 'enjoy' ta dùng V-ing, nên đáp án đúng là 'working'.",
+    "grammarPoint": "Gerund and Infinitive"
+  },
+  {
+    "id": 5,
+    "part": "Part 5",
+    "question": "The meeting starts _____ 9 a.m.",
+    "options": ["on", "in", "at", "to"],
+    "answer": "at",
+    "explanation": "Với giờ cụ thể như 9 a.m., ta dùng giới từ 'at'.",
+    "grammarPoint": "Prepositions of Time"
+  },
+  {
+    "id": 6,
+    "part": "Part 5",
+    "question": "The marketing team _____ a new campaign last month.",
+    "options": ["launch", "launched", "launching", "to launch"],
+    "answer": "launched",
+    "explanation": "Có dấu hiệu thời gian 'last month', nên dùng thì quá khứ đơn: 'launched'.",
+    "grammarPoint": "Tenses"
+  },
+  {
+    "id": 7,
+    "part": "Part 5",
+    "question": "The new policy _____ all employees in the company.",
+    "options": ["apply", "applies to", "applying", "to apply"],
+    "answer": "applies to",
+    "explanation": "Chủ ngữ 'policy' là số ít nên động từ thêm -s. Cụm đúng là 'apply to someone'.",
+    "grammarPoint": "Subject-Verb Agreement"
+  },
+  {
+    "id": 8,
+    "part": "Part 5",
+    "question": "Please remember _____ the invoice before Friday.",
+    "options": ["send", "sending", "to send", "sent"],
+    "answer": "to send",
+    "explanation": "Trong ngữ cảnh nhắc việc cần làm, 'remember + to V' nghĩa là nhớ làm việc gì.",
+    "grammarPoint": "Gerund and Infinitive"
+  },
+  {
+    "id": 9,
+    "part": "Part 5",
+    "question": "The shipment will arrive _____ two days.",
+    "options": ["at", "on", "in", "by"],
+    "answer": "in",
+    "explanation": "Dùng 'in + khoảng thời gian' để nói việc sẽ xảy ra sau bao lâu.",
+    "grammarPoint": "Prepositions of Time"
+  },
+  {
+    "id": 10,
+    "part": "Part 5",
+    "question": "All visitors _____ wear an identification badge.",
+    "options": ["must", "must to", "must be", "must have"],
+    "answer": "must",
+    "explanation": "Sau modal verb như 'must' dùng động từ nguyên mẫu không 'to'.",
+    "grammarPoint": "Modal Verbs"
+  },
+  {
+    "id": 11,
+    "part": "Part 5",
+    "question": "This printer is _____ than the old one.",
+    "options": ["efficient", "more efficient", "most efficient", "efficiency"],
+    "answer": "more efficient",
+    "explanation": "Có 'than' nên cần dạng so sánh hơn: 'more efficient'.",
+    "grammarPoint": "Comparatives"
+  },
+  {
+    "id": 12,
+    "part": "Part 5",
+    "question": "The supervisor asked the staff _____ the documents carefully.",
+    "options": ["review", "reviewing", "to review", "reviewed"],
+    "answer": "to review",
+    "explanation": "Cấu trúc 'ask someone to V' nghĩa là yêu cầu ai làm gì.",
+    "grammarPoint": "Gerund and Infinitive"
+  },
+  {
+    "id": 13,
+    "part": "Part 5",
+    "question": "The conference room _____ available after 3 p.m.",
+    "options": ["is", "are", "were", "be"],
+    "answer": "is",
+    "explanation": "Chủ ngữ 'conference room' là số ít nên dùng 'is'.",
+    "grammarPoint": "Subject-Verb Agreement"
+  },
+  {
+    "id": 14,
+    "part": "Part 5",
+    "question": "The company has _____ its sales strategy.",
+    "options": ["change", "changing", "changed", "to change"],
+    "answer": "changed",
+    "explanation": "Sau 'has' trong thì hiện tại hoàn thành dùng V3/ed: 'changed'.",
+    "grammarPoint": "Tenses"
+  },
+  {
+    "id": 15,
+    "part": "Part 5",
+    "question": "The interview is scheduled _____ Monday morning.",
+    "options": ["in", "at", "on", "for"],
+    "answer": "for",
+    "explanation": "Cụm 'be scheduled for + thời điểm/sự kiện' nghĩa là được lên lịch vào lúc nào.",
+    "grammarPoint": "Prepositions of Time"
+  },
+  {
+    "id": 16,
+    "part": "Part 5",
+    "question": "Employees should _____ the new safety guidelines.",
+    "options": ["follow", "to follow", "following", "followed"],
+    "answer": "follow",
+    "explanation": "Sau modal verb 'should' dùng động từ nguyên mẫu không 'to'.",
+    "grammarPoint": "Modal Verbs"
+  },
+  {
+    "id": 17,
+    "part": "Part 5",
+    "question": "The hotel offers _____ accommodations for business travelers.",
+    "options": ["comfort", "comfortable", "comfortably", "comforted"],
+    "answer": "comfortable",
+    "explanation": "Trước danh từ 'accommodations' cần tính từ, nên chọn 'comfortable'.",
+    "grammarPoint": "Word Form"
+  },
+  {
+    "id": 18,
+    "part": "Part 5",
+    "question": "The supplier delivered the materials _____ than expected.",
+    "options": ["early", "earlier", "earliest", "more early"],
+    "answer": "earlier",
+    "explanation": "Có 'than' nên dùng dạng so sánh hơn: 'earlier'.",
+    "grammarPoint": "Comparatives"
+  },
+  {
+    "id": 19,
+    "part": "Part 5",
+    "question": "The director will _____ the proposal tomorrow.",
+    "options": ["review", "reviews", "reviewed", "reviewing"],
+    "answer": "review",
+    "explanation": "Sau 'will' dùng động từ nguyên mẫu không 'to': 'review'.",
+    "grammarPoint": "Tenses"
+  },
+  {
+    "id": 20,
+    "part": "Part 5",
+    "question": "Several customers _____ complained about the delayed shipment.",
+    "options": ["has", "have", "having", "to have"],
+    "answer": "have",
+    "explanation": "Chủ ngữ 'Several customers' là số nhiều, nên dùng 'have'.",
+    "grammarPoint": "Subject-Verb Agreement"
+  }
+]
