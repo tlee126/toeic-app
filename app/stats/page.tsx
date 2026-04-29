@@ -63,7 +63,7 @@ export default function StatsPage() {
         </div>
 
         <div className="space-y-4">
-          <div className="rounded-3xl bg-white p-5 shadow">
+          <div className="rounded-3xl bg-white p-5 shadow-sm">
             <p className="text-sm text-slate-500">Từ vựng</p>
 
             <div className="mt-2 flex items-end justify-between">
@@ -103,7 +103,7 @@ export default function StatsPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl bg-white p-5 shadow">
+          <div className="rounded-3xl bg-white p-5 shadow-sm">
             <p className="text-sm text-slate-500">Mức nhớ Flashcard</p>
             <h2 className="mt-1 text-xl font-bold text-slate-900">
               Bạn đang nhớ từ như thế nào?
@@ -144,7 +144,7 @@ export default function StatsPage() {
             </p>
           </div>
 
-          <div className="rounded-3xl bg-white p-5 shadow">
+          <div className="rounded-3xl bg-white p-5 shadow-sm">
             <p className="text-sm text-slate-500">Luyện tập</p>
 
             <div className="mt-2 flex items-end justify-between">
@@ -172,7 +172,7 @@ export default function StatsPage() {
             </p>
           </div>
 
-          <div className="rounded-3xl bg-white p-5 shadow">
+          <div className="rounded-3xl bg-white p-5 shadow-sm">
             <p className="text-sm text-slate-500">Gợi ý hôm nay</p>
             <h2 className="mt-2 text-xl font-bold text-slate-900">
               Học thêm một chút nhé 🚀

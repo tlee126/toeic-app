@@ -63,19 +63,19 @@ export default function ReviewPage() {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <div className="rounded-2xl bg-white p-4 shadow">
+          <div className="rounded-2xl bg-white p-4 shadow-sm">
             <p className="text-2xl font-bold text-slate-900">
               {weakWords.length}
             </p>
             <p className="mt-1 text-sm text-slate-600">Từ yếu</p>
           </div>
 
-          <div className="rounded-2xl bg-red-50 p-4 shadow">
+          <div className="rounded-2xl bg-red-50 p-4 shadow-sm">
             <p className="text-2xl font-bold text-red-700">{forgotCount}</p>
             <p className="mt-1 text-sm text-red-600">Quên</p>
           </div>
 
-          <div className="rounded-2xl bg-orange-50 p-4 shadow">
+          <div className="rounded-2xl bg-orange-50 p-4 shadow-sm">
             <p className="text-2xl font-bold text-orange-700">{hardCount}</p>
             <p className="mt-1 text-sm text-orange-600">Khó</p>
           </div>
@@ -83,7 +83,7 @@ export default function ReviewPage() {
 
         {weakWords.length > 0 ? (
           <>
-            <div className="mt-5 rounded-3xl bg-white p-5 shadow">
+            <div className="mt-5 rounded-3xl bg-white p-5 shadow-sm">
               <p className="text-sm text-slate-500">Gợi ý</p>
               <h2 className="mt-2 text-xl font-bold text-slate-900">
                 Hãy ưu tiên nhóm này trước
@@ -106,7 +106,7 @@ export default function ReviewPage() {
                 const review = reviewData[word.id];
 
                 return (
-                  <div key={word.id} className="rounded-2xl bg-white p-4 shadow">
+                  <div key={word.id} className="rounded-2xl bg-white p-4 shadow-sm">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <h2 className="text-xl font-bold text-blue-600">
@@ -165,7 +165,7 @@ export default function ReviewPage() {
             </div>
           </>
         ) : (
-          <div className="mt-5 rounded-3xl bg-white p-6 text-center shadow">
+          <div className="mt-5 rounded-3xl bg-white p-6 text-center shadow-sm">
             <p className="text-4xl">🎉</p>
             <h2 className="mt-3 text-xl font-bold text-slate-900">
               Chưa có từ yếu

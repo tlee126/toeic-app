@@ -44,7 +44,7 @@ export default function MorePage() {
             <Link
               key={item.href}
               href={item.href}
-              className="block rounded-3xl bg-white p-5 shadow"
+              className="block rounded-3xl bg-white p-5 shadow-sm"
             >
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-2xl">

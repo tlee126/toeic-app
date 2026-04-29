@@ -17,7 +17,7 @@ export default function GrammarPage() {
 
         <div className="space-y-4">
           {grammarLessons.map((lesson) => (
-            <div key={lesson.id} className="rounded-2xl bg-white p-4 shadow">
+            <div key={lesson.id} className="rounded-2xl bg-white p-4 shadow-sm">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h2 className="text-xl font-bold text-slate-900">

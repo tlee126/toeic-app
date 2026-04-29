@@ -274,7 +274,7 @@ export default function FlashcardsPage() {
     return (
       <main className="min-h-screen bg-slate-100 px-4 pb-24 pt-6">
         <section className="mx-auto max-w-md">
-          <div className="rounded-3xl bg-white p-6 text-center shadow">
+          <div className="rounded-3xl bg-white p-6 text-center shadow-sm">
             <h1 className="text-2xl font-bold text-slate-900">
               Chưa có từ để học
             </h1>
@@ -308,7 +308,7 @@ export default function FlashcardsPage() {
 
         <div
           ref={sessionSizeRef}
-          className="mt-5 rounded-3xl bg-white p-4 shadow"
+          className="mt-5 rounded-3xl bg-white p-4 shadow-sm"
         >
           <p className="text-sm font-semibold text-slate-800">
             Cài đặt phiên học
@@ -336,7 +336,7 @@ export default function FlashcardsPage() {
               onChange={(event) =>
                 handleSessionSizeChange(parseSessionSize(event.target.value))
               }
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+              className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none focus:ring-2 focus:ring-blue-200"
             >
               {sessionSizeOptions.map((option) => (
                 <option key={String(option.value)} value={String(option.value)}>
@@ -384,7 +384,7 @@ export default function FlashcardsPage() {
         </div>
 
         {isSessionFinished ? (
-          <div className="mt-6 rounded-3xl bg-white p-6 text-center shadow-lg">
+          <div className="mt-6 rounded-3xl bg-white p-6 text-center shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900">
               Hoàn thành phiên học
             </h2>
@@ -425,14 +425,14 @@ export default function FlashcardsPage() {
 
             <button
               onClick={resetSessionProgress}
-              className="mt-5 w-full rounded-2xl bg-blue-600 p-3 text-sm font-semibold text-white shadow"
+              className="mt-5 w-full rounded-2xl bg-blue-600 p-3 text-sm font-semibold text-white shadow-sm"
             >
               Học lại phiên này
             </button>
 
             <button
               onClick={handleCreateNewSession}
-              className="mt-3 w-full rounded-2xl bg-white p-3 text-sm font-semibold text-blue-600 shadow"
+              className="mt-3 w-full rounded-2xl bg-white p-3 text-sm font-semibold text-blue-600 shadow-sm"
             >
               Tạo phiên mới
             </button>
@@ -456,7 +456,7 @@ export default function FlashcardsPage() {
                   setShowMeaning(!showMeaning);
                 }
               }}
-              className="mt-6 flex min-h-80 w-full flex-col items-center justify-center rounded-3xl bg-white p-6 text-center shadow-lg"
+              className="mt-6 flex min-h-80 w-full flex-col items-center justify-center rounded-3xl bg-white p-6 text-center shadow-sm"
             >
               {!showMeaning ? (
                 <>
@@ -561,7 +561,7 @@ export default function FlashcardsPage() {
 
             <button
               onClick={() => setShowMeaning(false)}
-              className="mt-4 w-full rounded-2xl bg-white p-3 text-sm font-semibold text-slate-700 shadow"
+              className="mt-4 w-full rounded-2xl bg-white p-3 text-sm font-semibold text-slate-700 shadow-sm"
             >
               Úp thẻ lại
             </button>

@@ -149,7 +149,7 @@ export default function PracticePage() {
     return (
       <main className="min-h-screen bg-slate-100 px-4 pb-24 pt-6">
         <section className="mx-auto max-w-md">
-          <div className="rounded-3xl bg-white p-6 text-center shadow">
+          <div className="rounded-3xl bg-white p-6 text-center shadow-sm">
             <p className="text-sm text-slate-500">Kết quả luyện tập</p>
 
             <h1 className="mt-2 text-3xl font-bold text-slate-900">
@@ -179,7 +179,7 @@ export default function PracticePage() {
             </div>
           </div>
 
-          <div className="mt-5 rounded-3xl bg-white p-5 shadow">
+          <div className="mt-5 rounded-3xl bg-white p-5 shadow-sm">
             <p className="text-sm text-slate-500">Nhận xét</p>
 
             {wrongAnswers.length === 0 ? (
@@ -219,14 +219,14 @@ export default function PracticePage() {
           <div className="mt-5 grid grid-cols-2 gap-3">
             <button
               onClick={handleRepeatSession}
-              className="rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow"
+              className="rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow-sm"
             >
               Làm lại phiên này
             </button>
 
             <button
               onClick={handleCreateNewSession}
-              className="rounded-2xl bg-white p-4 font-semibold text-slate-700 shadow"
+              className="rounded-2xl bg-white p-4 font-semibold text-slate-700 shadow-sm"
             >
               Tạo phiên mới
             </button>
@@ -234,7 +234,7 @@ export default function PracticePage() {
 
           <a
             href="/grammar"
-            className="mt-3 block rounded-2xl bg-white p-4 text-center font-semibold text-slate-700 shadow"
+            className="mt-3 block rounded-2xl bg-white p-4 text-center font-semibold text-slate-700 shadow-sm"
           >
             Ôn ngữ pháp
           </a>
@@ -268,7 +268,7 @@ export default function PracticePage() {
           </p>
         </div>
 
-        <div className="mb-5 rounded-2xl bg-white p-4 shadow">
+        <div className="mb-5 rounded-2xl bg-white p-4 shadow-sm">
           <p className="text-sm font-semibold text-slate-800">
             Bộ lọc luyện tập
           </p>
@@ -283,7 +283,7 @@ export default function PracticePage() {
                 onChange={(event) =>
                   handleSelectSessionSize(parseSessionSize(event.target.value))
                 }
-                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none focus:ring-2 focus:ring-blue-200"
               >
                 {sessionSizeOptions.map((size) => (
                   <option key={size} value={String(size)}>
@@ -302,7 +302,7 @@ export default function PracticePage() {
                 onChange={(event) =>
                   handleSelectGrammarPoint(event.target.value)
                 }
-                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none focus:ring-2 focus:ring-blue-200"
               >
                 {grammarPointOptions.map((grammarPoint) => (
                   <option key={grammarPoint} value={grammarPoint}>
@@ -326,20 +326,20 @@ export default function PracticePage() {
         </div>
 
         {!hasQuestions ? (
-          <div className="rounded-3xl bg-white p-6 text-center shadow">
+          <div className="rounded-3xl bg-white p-6 text-center shadow-sm">
             <h2 className="text-xl font-bold text-slate-900">
               Chưa có câu hỏi cho chủ điểm này.
             </h2>
             <button
               onClick={() => handleSelectGrammarPoint(allGrammarPointsLabel)}
-              className="mt-5 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow"
+              className="mt-5 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm"
             >
               Chọn tất cả
             </button>
           </div>
         ) : (
           <>
-            <div className="rounded-3xl bg-white p-5 shadow">
+            <div className="rounded-3xl bg-white p-5 shadow-sm">
               <div className="mb-4 flex items-center justify-between">
                 <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600">
                   {currentQuestion.part}
@@ -411,7 +411,7 @@ export default function PracticePage() {
             {isAnswered && (
               <button
                 onClick={handleNextQuestion}
-                className="mt-5 w-full rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow"
+                className="mt-5 w-full rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow-sm"
               >
                 {isLastQuestion ? "Xem kết quả" : "Câu tiếp theo"}
               </button>

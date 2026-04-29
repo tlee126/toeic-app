@@ -58,7 +58,7 @@ export default function SettingsPage() {
           </p>
         </div>
 
-        <div className="rounded-3xl bg-blue-600 p-5 text-white shadow">
+        <div className="rounded-3xl bg-blue-600 p-5 text-white shadow-sm">
           <p className="text-sm opacity-90">Mục tiêu hiện tại</p>
           <h2 className="mt-2 text-3xl font-bold">
             TOEIC {selectedGoal}
@@ -77,7 +77,7 @@ export default function SettingsPage() {
               <button
                 key={goal.value}
                 onClick={() => handleSelectGoal(goal.value)}
-                className={`w-full rounded-3xl border p-5 text-left shadow ${
+                className={`w-full rounded-3xl border p-5 text-left shadow-sm ${
                   isActive
                     ? "border-blue-600 bg-blue-50"
                     : "border-transparent bg-white"
@@ -112,7 +112,7 @@ export default function SettingsPage() {
           })}
         </div>
 
-        <div className="mt-6 rounded-3xl bg-white p-5 shadow">
+        <div className="mt-6 rounded-3xl bg-white p-5 shadow-sm">
           <p className="text-sm text-slate-500">Gợi ý</p>
           <h2 className="mt-2 text-xl font-bold text-slate-900">
             App sẽ dùng mục tiêu này để làm gì?

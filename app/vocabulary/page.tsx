@@ -86,7 +86,7 @@ export default function VocabularyPage() {
           </p>
         </div>
 
-        <div className="rounded-3xl bg-white p-4 shadow">
+        <div className="rounded-3xl bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="text-sm font-semibold text-slate-800">Bộ lọc</p>
@@ -118,7 +118,7 @@ export default function VocabularyPage() {
             value={searchText}
             onChange={(event) => setSearchText(event.target.value)}
             placeholder="Tìm từ, nghĩa, ví dụ hoặc chủ đề..."
-            className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white"
+            className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none transition placeholder:text-slate-400 focus:ring-2 focus:ring-blue-200"
           />
 
           <div className="mt-4 grid grid-cols-2 gap-3">
@@ -129,7 +129,7 @@ export default function VocabularyPage() {
               <select
                 value={selectedTopic}
                 onChange={(event) => setSelectedTopic(event.target.value)}
-                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none focus:ring-2 focus:ring-blue-200"
               >
                 {topics.map((topic) => (
                   <option key={topic} value={topic}>
@@ -148,7 +148,7 @@ export default function VocabularyPage() {
                 onChange={(event) =>
                   setSelectedLevel(event.target.value as "All" | WordLevel)
                 }
-                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none focus:ring-2 focus:ring-blue-200"
               >
                 {levels.map((level) => (
                   <option key={level} value={level}>
@@ -187,7 +187,7 @@ export default function VocabularyPage() {
 
         <div className="mt-4 space-y-4">
           {filteredWords.map((item) => (
-            <div key={item.id} className="rounded-2xl bg-white p-4 shadow">
+            <div key={item.id} className="rounded-2xl bg-white p-4 shadow-sm">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <h2 className="text-xl font-bold text-blue-600">
@@ -243,7 +243,7 @@ export default function VocabularyPage() {
           ))}
 
           {filteredWords.length === 0 && (
-            <div className="rounded-2xl bg-white p-6 text-center shadow">
+            <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
               <p className="text-lg font-bold text-slate-800">
                 Không có từ phù hợp
               </p>
