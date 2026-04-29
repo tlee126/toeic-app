@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TOEIC Study App
 
-## Getting Started
+## Giới thiệu
 
-First, run the development server:
+TOEIC Study App là ứng dụng học TOEIC theo hướng mobile-first, hỗ trợ học từ vựng, luyện flashcards, ôn ngữ pháp, làm bài practice, review nội dung yếu và theo dõi tiến độ học tập.
+
+## Tính năng hiện có
+
+- Vocabulary search and filters
+- Pronunciation using browser speech synthesis
+- Flashcard sessions: 5 / 10 / 20 / all
+- Review weak words
+- Grammar lessons
+- TOEIC Part 5 practice sessions
+- Stats
+- TOEIC goal settings
+- CSV content import workflow
+
+## Công nghệ sử dụng
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- localStorage
+- CSV/JSON data workflow
+
+## Cách chạy local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở ứng dụng tại:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ví dụ chạy để kiểm thử trên thiết bị cùng mạng:
 
-## Learn More
+```bash
+npm run dev -- -H 192.168.1.2
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Cách build kiểm tra
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Quy trình dữ liệu hiện tại
 
-## Deploy on Vercel
+App hiện đọc dữ liệu thật từ:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `data/words.json`
+- `data/questions.json`
+- `data/grammar.json`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+CSV templates nằm trong:
+
+- `templates/`
+
+Import scripts nằm trong:
+
+- `scripts/`
+
+Documentation nằm trong:
+
+- `docs/`
+
+## Ghi chú quan trọng
+
+- Current progress is stored in localStorage.
+- Progress is not synced across devices yet.
+- Database and login will be added in a later phase.
+- Do not push/deploy before testing locally because Vercel auto-deploys after git push.

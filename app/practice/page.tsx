@@ -3,31 +3,41 @@
 import { useEffect, useState } from "react";
 import { questions } from "@/data/questions";
 import BottomNav from "@/components/BottomNav";
+import {
+  getPracticedCount,
+  setPracticedCount as savePracticedCount,
+} from "@/lib/storage";
+import type { PracticeWrongAnswer, SessionSize } from "@/types/study";
 
-type WrongAnswer = {
-  questionId: number;
-  grammarPoint: string;
-};
+const sessionSizeOptions: SessionSize[] = [5, 10, 20, "all"];
+
+function createSessionQuestions(size: SessionSize) {
+  if (size === "all") {
+    return questions;
+  }
+
+  return questions.slice(0, size);
+}
 
 export default function PracticePage() {
+  const [sessionSize, setSessionSize] = useState<SessionSize>(5);
+  const [sessionQuestions, setSessionQuestions] = useState(() =>
+    createSessionQuestions(5)
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [score, setScore] = useState(0);
   const [practicedCount, setPracticedCount] = useState(0);
-  const [wrongAnswers, setWrongAnswers] = useState<WrongAnswer[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<PracticeWrongAnswer[]>([]);
   const [isFinished, setIsFinished] = useState(false);
 
-  const currentQuestion = questions[currentIndex];
+  const currentQuestion = sessionQuestions[currentIndex];
   const isAnswered = selectedAnswer !== "";
   const isCorrect = selectedAnswer === currentQuestion.answer;
-  const isLastQuestion = currentIndex === questions.length - 1;
+  const isLastQuestion = currentIndex === sessionQuestions.length - 1;
 
   useEffect(() => {
-    const savedPracticedCount = localStorage.getItem("practicedCount");
-
-    if (savedPracticedCount) {
-      setPracticedCount(Number(savedPracticedCount));
-    }
+    setPracticedCount(getPracticedCount());
   }, []);
 
   function handleSelectAnswer(option: string) {
@@ -37,7 +47,7 @@ export default function PracticePage() {
 
     const newPracticedCount = practicedCount + 1;
     setPracticedCount(newPracticedCount);
-    localStorage.setItem("practicedCount", String(newPracticedCount));
+    savePracticedCount(newPracticedCount);
 
     if (option === currentQuestion.answer) {
       setScore(score + 1);
@@ -61,7 +71,7 @@ export default function PracticePage() {
     }
   }
 
-  function handleRestartPractice() {
+  function resetSessionProgress() {
     setCurrentIndex(0);
     setSelectedAnswer("");
     setScore(0);
@@ -69,12 +79,27 @@ export default function PracticePage() {
     setIsFinished(false);
   }
 
-  function handleResetPracticeCount() {
-    setPracticedCount(0);
-    localStorage.setItem("practicedCount", "0");
+  function handleSelectSessionSize(size: SessionSize) {
+    setSessionSize(size);
+    setSessionQuestions(createSessionQuestions(size));
+    resetSessionProgress();
   }
 
-  const accuracy = Math.round((score / questions.length) * 100);
+  function handleRepeatSession() {
+    resetSessionProgress();
+  }
+
+  function handleCreateNewSession() {
+    setSessionQuestions(createSessionQuestions(sessionSize));
+    resetSessionProgress();
+  }
+
+  function handleResetPracticeCount() {
+    setPracticedCount(0);
+    savePracticedCount(0);
+  }
+
+  const accuracy = Math.round((score / sessionQuestions.length) * 100);
 
   const weakGrammarPoints = Array.from(
     new Set(wrongAnswers.map((item) => item.grammarPoint))
@@ -93,6 +118,10 @@ export default function PracticePage() {
 
             <p className="mt-3 text-sm text-slate-600">
               Bạn đã làm xong bài luyện TOEIC Part 5.
+            </p>
+
+            <p className="mt-4 text-base font-semibold text-slate-700">
+              Bạn đúng {score} / {sessionQuestions.length} câu
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
@@ -149,19 +178,26 @@ export default function PracticePage() {
 
           <div className="mt-5 grid grid-cols-2 gap-3">
             <button
-              onClick={handleRestartPractice}
+              onClick={handleRepeatSession}
               className="rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow"
             >
-              Làm lại
+              Làm lại phiên này
             </button>
 
-            <a
-              href="/grammar"
-              className="rounded-2xl bg-white p-4 text-center font-semibold text-slate-700 shadow"
+            <button
+              onClick={handleCreateNewSession}
+              className="rounded-2xl bg-white p-4 font-semibold text-slate-700 shadow"
             >
-              Ôn ngữ pháp
-            </a>
+              Tạo phiên mới
+            </button>
           </div>
+
+          <a
+            href="/grammar"
+            className="mt-3 block rounded-2xl bg-white p-4 text-center font-semibold text-slate-700 shadow"
+          >
+            Ôn ngữ pháp
+          </a>
 
           <button
             onClick={handleResetPracticeCount}
@@ -181,7 +217,7 @@ export default function PracticePage() {
       <section className="mx-auto max-w-md">
         <div className="mb-6">
           <p className="text-sm text-slate-500">
-            Câu {currentIndex + 1} / {questions.length}
+            Câu {currentIndex + 1} / {sessionQuestions.length}
           </p>
           <h1 className="mt-1 text-3xl font-bold text-slate-900">
             TOEIC Part 5
@@ -189,6 +225,33 @@ export default function PracticePage() {
           <p className="mt-2 text-sm text-slate-600">
             Chọn đáp án đúng cho câu còn thiếu.
           </p>
+        </div>
+
+        <div className="mb-5 rounded-2xl bg-white p-4 shadow">
+          <p className="text-sm font-semibold text-slate-700">
+            Số câu trong phiên luyện
+          </p>
+
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {sessionSizeOptions.map((size) => {
+              const isActive = sessionSize === size;
+              const label = size === "all" ? "Tất cả" : `${size} câu`;
+
+              return (
+                <button
+                  key={size}
+                  onClick={() => handleSelectSessionSize(size)}
+                  className={`rounded-2xl border p-3 text-sm font-semibold ${
+                    isActive
+                      ? "border-blue-600 bg-blue-600 text-white shadow"
+                      : "border-slate-200 bg-white text-slate-700"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="mb-5 rounded-2xl bg-green-50 p-4">

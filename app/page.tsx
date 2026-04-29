@@ -6,17 +6,13 @@ import { words } from "@/data/words";
 import { questions } from "@/data/questions";
 import { grammarLessons } from "@/data/grammar";
 import BottomNav from "@/components/BottomNav";
-
-type ToeicGoal = 450 | 650 | 750;
-type ReviewRating = "forgot" | "hard" | "good" | "easy";
-
-type WordReview = {
-  rating: ReviewRating;
-  count: number;
-  lastReviewed: string;
-};
-
-type ReviewData = Record<number, WordReview>;
+import {
+  getPracticedCount,
+  getReviewedCount,
+  getToeicGoal,
+  getWordReviewData,
+} from "@/lib/storage";
+import type { ReviewData, ToeicGoal } from "@/types/study";
 
 function getGoalDescription(goal: ToeicGoal) {
   if (goal === 450) {
@@ -37,30 +33,10 @@ export default function Home() {
   const [reviewData, setReviewData] = useState<ReviewData>({});
 
   useEffect(() => {
-    const savedReviewedCount = localStorage.getItem("reviewedCount");
-    const savedPracticedCount = localStorage.getItem("practicedCount");
-    const savedToeicGoal = localStorage.getItem("toeicGoal");
-    const savedReviewData = localStorage.getItem("wordReviewData");
-
-    if (savedReviewedCount) {
-      setReviewedCount(Number(savedReviewedCount));
-    }
-
-    if (savedPracticedCount) {
-      setPracticedCount(Number(savedPracticedCount));
-    }
-
-    if (
-      savedToeicGoal === "450" ||
-      savedToeicGoal === "650" ||
-      savedToeicGoal === "750"
-    ) {
-      setToeicGoal(Number(savedToeicGoal) as ToeicGoal);
-    }
-
-    if (savedReviewData) {
-      setReviewData(JSON.parse(savedReviewData));
-    }
+    setReviewedCount(getReviewedCount());
+    setPracticedCount(getPracticedCount());
+    setToeicGoal(getToeicGoal());
+    setReviewData(getWordReviewData());
   }, []);
 
   const wordsForGoal = words.filter((word) => word.toeicTarget <= toeicGoal);

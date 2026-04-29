@@ -210,5 +210,80 @@
         "vi": "Đề xuất sẽ được xem xét vào ngày mai."
       }
     ]
+  },
+  {
+    "id": 9,
+    "title": "Conditional Sentences",
+    "titleVi": "Câu điều kiện",
+    "level": "Intermediate",
+    "toeicPart": "Part 5",
+    "summary": "Use conditional sentences to describe possible situations",
+    "rules": [
+      "if plus present then will plus verb",
+      "if plus past then would plus verb",
+      "unless means if not"
+    ],
+    "examples": [
+      {
+        "en": "If the shipment arrives today we will notify the client",
+        "vi": "Nếu lô hàng đến hôm nay chúng tôi sẽ thông báo cho khách hàng"
+      },
+      {
+        "en": "Unless the report is ready we will delay the meeting",
+        "vi": "Nếu báo cáo chưa sẵn sàng chúng tôi sẽ hoãn cuộc họp"
+      }
+    ],
+    "relatedQuestionIds": []
+  },
+  {
+    "id": 10,
+    "title": "Articles",
+    "titleVi": "Mạo từ",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "Use a an and the before nouns when needed",
+    "rules": [
+      "a plus consonant sound",
+      "an plus vowel sound",
+      "the for specific nouns"
+    ],
+    "examples": [
+      {
+        "en": "She received an email from the client",
+        "vi": "Cô ấy đã nhận một email từ khách hàng"
+      },
+      {
+        "en": "The manager approved the request",
+        "vi": "Người quản lý đã phê duyệt yêu cầu"
+      }
+    ],
+    "relatedQuestionIds": []
+  },
+  {
+    "id": 11,
+    "title": "Adverbs of Frequency",
+    "titleVi": "Trạng từ tần suất",
+    "level": "Basic",
+    "toeicPart": "Part 5",
+    "summary": "Use frequency adverbs to describe how often an action happens",
+    "rules": [
+      "always",
+      "usually",
+      "often",
+      "sometimes",
+      "rarely",
+      "never"
+    ],
+    "examples": [
+      {
+        "en": "Employees usually attend training on Monday",
+        "vi": "Nhân viên thường tham gia đào tạo vào thứ Hai"
+      },
+      {
+        "en": "The system rarely causes delays",
+        "vi": "Hệ thống hiếm khi gây ra sự trì hoãn"
+      }
+    ],
+    "relatedQuestionIds": []
   }
 ]

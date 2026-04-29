@@ -5,16 +5,12 @@ import Link from "next/link";
 import { words } from "@/data/words";
 import { questions } from "@/data/questions";
 import BottomNav from "@/components/BottomNav";
-
-type ReviewRating = "forgot" | "hard" | "good" | "easy";
-
-type WordReview = {
-  rating: ReviewRating;
-  count: number;
-  lastReviewed: string;
-};
-
-type ReviewData = Record<number, WordReview>;
+import {
+  getPracticedCount,
+  getReviewedCount,
+  getWordReviewData,
+} from "@/lib/storage";
+import type { ReviewData } from "@/types/study";
 
 export default function StatsPage() {
   const [reviewedCount, setReviewedCount] = useState(0);
@@ -22,21 +18,9 @@ export default function StatsPage() {
   const [reviewData, setReviewData] = useState<ReviewData>({});
 
   useEffect(() => {
-    const savedReviewedCount = localStorage.getItem("reviewedCount");
-    const savedPracticedCount = localStorage.getItem("practicedCount");
-    const savedReviewData = localStorage.getItem("wordReviewData");
-
-    if (savedReviewedCount) {
-      setReviewedCount(Number(savedReviewedCount));
-    }
-
-    if (savedPracticedCount) {
-      setPracticedCount(Number(savedPracticedCount));
-    }
-
-    if (savedReviewData) {
-      setReviewData(JSON.parse(savedReviewData));
-    }
+    setReviewedCount(getReviewedCount());
+    setPracticedCount(getPracticedCount());
+    setReviewData(getWordReviewData());
   }, []);
 
   const learnedWords = Object.keys(reviewData).length;

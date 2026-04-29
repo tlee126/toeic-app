@@ -4,16 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { words } from "@/data/words";
 import BottomNav from "@/components/BottomNav";
-
-type ReviewRating = "forgot" | "hard" | "good" | "easy";
-
-type WordReview = {
-  rating: ReviewRating;
-  count: number;
-  lastReviewed: string;
-};
-
-type ReviewData = Record<number, WordReview>;
+import { getWordReviewData } from "@/lib/storage";
+import type { ReviewData, ReviewRating } from "@/types/study";
 
 function getRatingLabel(rating?: ReviewRating) {
   if (rating === "forgot") return "Quên";
@@ -41,11 +33,7 @@ export default function ReviewPage() {
   const [reviewData, setReviewData] = useState<ReviewData>({});
 
   useEffect(() => {
-    const savedReviewData = localStorage.getItem("wordReviewData");
-
-    if (savedReviewData) {
-      setReviewData(JSON.parse(savedReviewData));
-    }
+    setReviewData(getWordReviewData());
   }, []);
 
   const weakWords = words.filter((word) => {

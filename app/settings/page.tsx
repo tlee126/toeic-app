@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import BottomNav from "@/components/BottomNav";
-
-type ToeicGoal = 450 | 650 | 750;
+import { getToeicGoal, setToeicGoal } from "@/lib/storage";
+import type { ToeicGoal } from "@/types/study";
 
 const goals: {
   value: ToeicGoal;
@@ -35,16 +35,12 @@ export default function SettingsPage() {
   const [selectedGoal, setSelectedGoal] = useState<ToeicGoal>(450);
 
   useEffect(() => {
-    const savedGoal = localStorage.getItem("toeicGoal");
-
-    if (savedGoal === "450" || savedGoal === "650" || savedGoal === "750") {
-      setSelectedGoal(Number(savedGoal) as ToeicGoal);
-    }
+    setSelectedGoal(getToeicGoal());
   }, []);
 
   function handleSelectGoal(goal: ToeicGoal) {
     setSelectedGoal(goal);
-    localStorage.setItem("toeicGoal", String(goal));
+    setToeicGoal(goal);
   }
 
   const selectedGoalData = goals.find((goal) => goal.value === selectedGoal);

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { words, WordLevel } from "@/data/words";
 import BottomNav from "@/components/BottomNav";
+import SpeakButton from "@/components/SpeakButton";
 
 type ToeicGoal = 450 | 650 | 750;
 
@@ -32,6 +33,7 @@ export default function VocabularyPage() {
   const [selectedLevel, setSelectedLevel] = useState<"All" | WordLevel>("All");
   const [toeicGoal, setToeicGoal] = useState<ToeicGoal>(450);
   const [useGoalFilter, setUseGoalFilter] = useState(true);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const savedToeicGoal = localStorage.getItem("toeicGoal");
@@ -46,11 +48,22 @@ export default function VocabularyPage() {
   }, []);
 
   const filteredWords = words.filter((item) => {
+    const normalizedSearchText = searchText.trim().toLowerCase();
     const matchTopic = selectedTopic === "All" || item.topic === selectedTopic;
     const matchLevel = selectedLevel === "All" || item.level === selectedLevel;
     const matchGoal = !useGoalFilter || item.toeicTarget <= toeicGoal;
+    const matchSearch =
+      normalizedSearchText === "" ||
+      [
+        item.word,
+        item.meaning,
+        item.example,
+        item.exampleMeaning,
+        item.topic,
+        item.level,
+      ].some((value) => value.toLowerCase().includes(normalizedSearchText));
 
-    return matchTopic && matchLevel && matchGoal;
+    return matchTopic && matchLevel && matchGoal && matchSearch;
   });
 
   return (
@@ -87,6 +100,33 @@ export default function VocabularyPage() {
         </div>
 
         <div className="rounded-3xl bg-white p-4 shadow">
+          <label
+            htmlFor="vocabulary-search"
+            className="text-sm font-semibold text-slate-800"
+          >
+            Tìm kiếm
+          </label>
+
+          <input
+            id="vocabulary-search"
+            type="search"
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+            placeholder="Tìm từ, nghĩa, ví dụ hoặc chủ đề..."
+            className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white"
+          />
+
+          {searchText.trim() !== "" && (
+            <button
+              type="button"
+              onClick={() => setSearchText("")}
+              className="mt-3 text-sm font-semibold text-blue-600"
+            >
+              Xóa tìm kiếm
+            </button>
+          )}
+
+          <div className="mt-5 border-t border-slate-100 pt-5">
           <p className="text-sm font-semibold text-slate-800">Chủ đề</p>
 
           <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
@@ -107,6 +147,7 @@ export default function VocabularyPage() {
                 </button>
               );
             })}
+          </div>
           </div>
 
           <p className="mt-5 text-sm font-semibold text-slate-800">Level</p>
@@ -146,6 +187,7 @@ export default function VocabularyPage() {
               setSelectedTopic("All");
               setSelectedLevel("All");
               setUseGoalFilter(true);
+              setSearchText("");
             }}
             className="text-sm font-semibold text-blue-600"
           >
@@ -157,13 +199,16 @@ export default function VocabularyPage() {
           {filteredWords.map((item) => (
             <div key={item.id} className="rounded-2xl bg-white p-4 shadow">
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="min-w-0">
                   <h2 className="text-xl font-bold text-blue-600">
                     {item.word}
                   </h2>
-                  <p className="mt-1 text-sm text-slate-500">
-                    {item.pronunciation}
-                  </p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <p className="text-sm text-slate-500">
+                      {item.pronunciation}
+                    </p>
+                    <SpeakButton text={item.word} />
+                  </div>
                 </div>
 
                 <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600">

@@ -598,5 +598,59 @@
     "level": "advanced",
     "toeicTarget": 750,
     "difficulty": 3
+  },
+  {
+    "id": 51,
+    "word": "coordinator",
+    "pronunciation": "/koʊˈɔːrdɪneɪtər/",
+    "meaning": "điều phối viên",
+    "example": "The coordinator arranged the meeting schedule.",
+    "exampleMeaning": "Điều phối viên đã sắp xếp lịch họp.",
+    "topic": "Office",
+    "level": "intermediate",
+    "toeicTarget": 650,
+    "difficulty": 2,
+    "tags": [
+      "office",
+      "schedule",
+      "meeting"
+    ],
+    "partOfSpeech": "noun"
+  },
+  {
+    "id": 52,
+    "word": "authorize",
+    "pronunciation": "/ˈɔːθəraɪz/",
+    "meaning": "ủy quyền",
+    "example": "Only the manager can authorize this payment.",
+    "exampleMeaning": "Chỉ quản lý mới có thể ủy quyền khoản thanh toán này.",
+    "topic": "Business",
+    "level": "advanced",
+    "toeicTarget": 750,
+    "difficulty": 3,
+    "tags": [
+      "business",
+      "payment",
+      "approval"
+    ],
+    "partOfSpeech": "verb"
+  },
+  {
+    "id": 53,
+    "word": "boarding pass",
+    "pronunciation": "/ˈbɔːrdɪŋ pæs/",
+    "meaning": "thẻ lên máy bay",
+    "example": "Please show your boarding pass at the gate.",
+    "exampleMeaning": "Vui lòng xuất trình thẻ lên máy bay tại cổng.",
+    "topic": "Travel",
+    "level": "beginner",
+    "toeicTarget": 450,
+    "difficulty": 1,
+    "tags": [
+      "travel",
+      "airport",
+      "flight"
+    ],
+    "partOfSpeech": "noun"
   }
 ]
