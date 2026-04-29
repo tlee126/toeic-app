@@ -47,6 +47,13 @@ export default function VocabularyPage() {
     }
   }, []);
 
+  function handleResetFilters() {
+    setSearchText("");
+    setSelectedTopic("All");
+    setSelectedLevel("All");
+    setUseGoalFilter(true);
+  }
+
   const filteredWords = words.filter((item) => {
     const normalizedSearchText = searchText.trim().toLowerCase();
     const matchTopic = selectedTopic === "All" || item.topic === selectedTopic;
@@ -79,30 +86,28 @@ export default function VocabularyPage() {
           </p>
         </div>
 
-        <div className="mb-5 rounded-3xl bg-blue-600 p-5 text-white shadow">
-          <p className="text-sm opacity-90">Mục tiêu hiện tại</p>
-          <h2 className="mt-1 text-2xl font-bold">
-            TOEIC {toeicGoal}
-            {toeicGoal === 750 ? "+" : ""}
-          </h2>
-          <p className="mt-2 text-sm opacity-90">
-            {useGoalFilter
-              ? "Đang chỉ hiện các từ phù hợp với mục tiêu này."
-              : "Đang hiện tất cả từ trong kho."}
-          </p>
-
-          <button
-            onClick={() => setUseGoalFilter(!useGoalFilter)}
-            className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-semibold text-blue-600"
-          >
-            {useGoalFilter ? "Hiện tất cả từ" : "Lọc theo mục tiêu"}
-          </button>
-        </div>
-
         <div className="rounded-3xl bg-white p-4 shadow">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-slate-800">Bộ lọc</p>
+              <p className="mt-1 text-xs text-slate-500">
+                TOEIC {toeicGoal}
+                {toeicGoal === 750 ? "+" : ""}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="rounded-full bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700"
+            >
+              Xóa lọc
+            </button>
+          </div>
+
           <label
             htmlFor="vocabulary-search"
-            className="text-sm font-semibold text-slate-800"
+            className="mt-4 block text-sm font-semibold text-slate-800"
           >
             Tìm kiếm
           </label>
@@ -113,63 +118,60 @@ export default function VocabularyPage() {
             value={searchText}
             onChange={(event) => setSearchText(event.target.value)}
             placeholder="Tìm từ, nghĩa, ví dụ hoặc chủ đề..."
-            className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white"
+            className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white"
           />
 
-          {searchText.trim() !== "" && (
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <label className="block">
+              <span className="text-sm font-semibold text-slate-800">
+                Chủ đề
+              </span>
+              <select
+                value={selectedTopic}
+                onChange={(event) => setSelectedTopic(event.target.value)}
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+              >
+                {topics.map((topic) => (
+                  <option key={topic} value={topic}>
+                    {topic}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="text-sm font-semibold text-slate-800">
+                Level
+              </span>
+              <select
+                value={selectedLevel}
+                onChange={(event) =>
+                  setSelectedLevel(event.target.value as "All" | WordLevel)
+                }
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+              >
+                {levels.map((level) => (
+                  <option key={level} value={level}>
+                    {level === "All" ? "All" : getLevelLabel(level)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className="mt-4 rounded-2xl bg-blue-50 p-3">
+            <p className="text-sm font-semibold text-blue-700">
+              {useGoalFilter
+                ? "Đang lọc theo mục tiêu"
+                : "Đang hiện tất cả từ"}
+            </p>
             <button
               type="button"
-              onClick={() => setSearchText("")}
-              className="mt-3 text-sm font-semibold text-blue-600"
+              onClick={() => setUseGoalFilter(!useGoalFilter)}
+              className="mt-2 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white"
             >
-              Xóa tìm kiếm
+              {useGoalFilter ? "Hiện tất cả từ" : "Lọc theo mục tiêu"}
             </button>
-          )}
-
-          <div className="mt-5 border-t border-slate-100 pt-5">
-          <p className="text-sm font-semibold text-slate-800">Chủ đề</p>
-
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-            {topics.map((topic) => {
-              const isActive = selectedTopic === topic;
-
-              return (
-                <button
-                  key={topic}
-                  onClick={() => setSelectedTopic(topic)}
-                  className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium ${
-                    isActive
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-100 text-slate-600"
-                  }`}
-                >
-                  {topic}
-                </button>
-              );
-            })}
-          </div>
-          </div>
-
-          <p className="mt-5 text-sm font-semibold text-slate-800">Level</p>
-
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-            {levels.map((level) => {
-              const isActive = selectedLevel === level;
-
-              return (
-                <button
-                  key={level}
-                  onClick={() => setSelectedLevel(level)}
-                  className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium ${
-                    isActive
-                      ? "bg-green-600 text-white"
-                      : "bg-slate-100 text-slate-600"
-                  }`}
-                >
-                  {level === "All" ? "All" : getLevelLabel(level)}
-                </button>
-              );
-            })}
           </div>
         </div>
 
@@ -181,18 +183,6 @@ export default function VocabularyPage() {
             </span>{" "}
             từ
           </p>
-
-          <button
-            onClick={() => {
-              setSelectedTopic("All");
-              setSelectedLevel("All");
-              setUseGoalFilter(true);
-              setSearchText("");
-            }}
-            className="text-sm font-semibold text-blue-600"
-          >
-            Xóa lọc
-          </button>
         </div>
 
         <div className="mt-4 space-y-4">

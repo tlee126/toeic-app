@@ -9,20 +9,46 @@ import {
 } from "@/lib/storage";
 import type { PracticeWrongAnswer, SessionSize } from "@/types/study";
 
+const allGrammarPointsLabel = "All";
 const sessionSizeOptions: SessionSize[] = [5, 10, 20, "all"];
+const grammarPointOptions = [
+  allGrammarPointsLabel,
+  ...Array.from(new Set(questions.map((question) => question.grammarPoint))),
+];
 
-function createSessionQuestions(size: SessionSize) {
-  if (size === "all") {
+function getFilteredQuestions(grammarPoint: string) {
+  if (grammarPoint === allGrammarPointsLabel) {
     return questions;
   }
 
-  return questions.slice(0, size);
+  return questions.filter((question) => question.grammarPoint === grammarPoint);
+}
+
+function createSessionQuestions(size: SessionSize, grammarPoint: string) {
+  const baseQuestions = getFilteredQuestions(grammarPoint);
+
+  if (size === "all") {
+    return baseQuestions;
+  }
+
+  return baseQuestions.slice(0, size);
+}
+
+function parseSessionSize(value: string): SessionSize {
+  if (value === "all") {
+    return "all";
+  }
+
+  return Number(value) as SessionSize;
 }
 
 export default function PracticePage() {
+  const [selectedGrammarPoint, setSelectedGrammarPoint] = useState(
+    allGrammarPointsLabel
+  );
   const [sessionSize, setSessionSize] = useState<SessionSize>(5);
   const [sessionQuestions, setSessionQuestions] = useState(() =>
-    createSessionQuestions(5)
+    createSessionQuestions(5, allGrammarPointsLabel)
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -32,16 +58,33 @@ export default function PracticePage() {
   const [isFinished, setIsFinished] = useState(false);
 
   const currentQuestion = sessionQuestions[currentIndex];
+  const hasQuestions = sessionQuestions.length > 0;
   const isAnswered = selectedAnswer !== "";
-  const isCorrect = selectedAnswer === currentQuestion.answer;
-  const isLastQuestion = currentIndex === sessionQuestions.length - 1;
+  const isCorrect = currentQuestion
+    ? selectedAnswer === currentQuestion.answer
+    : false;
+  const isLastQuestion =
+    hasQuestions && currentIndex === sessionQuestions.length - 1;
 
   useEffect(() => {
     setPracticedCount(getPracticedCount());
   }, []);
 
+  function resetSessionProgress() {
+    setCurrentIndex(0);
+    setSelectedAnswer("");
+    setScore(0);
+    setWrongAnswers([]);
+    setIsFinished(false);
+  }
+
+  function startNewSession(size: SessionSize, grammarPoint: string) {
+    setSessionQuestions(createSessionQuestions(size, grammarPoint));
+    resetSessionProgress();
+  }
+
   function handleSelectAnswer(option: string) {
-    if (isAnswered) return;
+    if (isAnswered || !currentQuestion) return;
 
     setSelectedAnswer(option);
 
@@ -71,18 +114,14 @@ export default function PracticePage() {
     }
   }
 
-  function resetSessionProgress() {
-    setCurrentIndex(0);
-    setSelectedAnswer("");
-    setScore(0);
-    setWrongAnswers([]);
-    setIsFinished(false);
-  }
-
   function handleSelectSessionSize(size: SessionSize) {
     setSessionSize(size);
-    setSessionQuestions(createSessionQuestions(size));
-    resetSessionProgress();
+    startNewSession(size, selectedGrammarPoint);
+  }
+
+  function handleSelectGrammarPoint(grammarPoint: string) {
+    setSelectedGrammarPoint(grammarPoint);
+    startNewSession(sessionSize, grammarPoint);
   }
 
   function handleRepeatSession() {
@@ -90,8 +129,7 @@ export default function PracticePage() {
   }
 
   function handleCreateNewSession() {
-    setSessionQuestions(createSessionQuestions(sessionSize));
-    resetSessionProgress();
+    startNewSession(sessionSize, selectedGrammarPoint);
   }
 
   function handleResetPracticeCount() {
@@ -99,7 +137,9 @@ export default function PracticePage() {
     savePracticedCount(0);
   }
 
-  const accuracy = Math.round((score / sessionQuestions.length) * 100);
+  const accuracy = hasQuestions
+    ? Math.round((score / sessionQuestions.length) * 100)
+    : 0;
 
   const weakGrammarPoints = Array.from(
     new Set(wrongAnswers.map((item) => item.grammarPoint))
@@ -113,7 +153,7 @@ export default function PracticePage() {
             <p className="text-sm text-slate-500">Kết quả luyện tập</p>
 
             <h1 className="mt-2 text-3xl font-bold text-slate-900">
-              Hoàn thành 🎉
+              Hoàn thành
             </h1>
 
             <p className="mt-3 text-sm text-slate-600">
@@ -217,7 +257,8 @@ export default function PracticePage() {
       <section className="mx-auto max-w-md">
         <div className="mb-6">
           <p className="text-sm text-slate-500">
-            Câu {currentIndex + 1} / {sessionQuestions.length}
+            Câu {hasQuestions ? currentIndex + 1 : 0} /{" "}
+            {sessionQuestions.length}
           </p>
           <h1 className="mt-1 text-3xl font-bold text-slate-900">
             TOEIC Part 5
@@ -228,30 +269,53 @@ export default function PracticePage() {
         </div>
 
         <div className="mb-5 rounded-2xl bg-white p-4 shadow">
-          <p className="text-sm font-semibold text-slate-700">
-            Số câu trong phiên luyện
+          <p className="text-sm font-semibold text-slate-800">
+            Bộ lọc luyện tập
           </p>
 
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {sessionSizeOptions.map((size) => {
-              const isActive = sessionSize === size;
-              const label = size === "all" ? "Tất cả" : `${size} câu`;
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <label className="block">
+              <span className="text-sm font-semibold text-slate-700">
+                Số câu trong phiên
+              </span>
+              <select
+                value={String(sessionSize)}
+                onChange={(event) =>
+                  handleSelectSessionSize(parseSessionSize(event.target.value))
+                }
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+              >
+                {sessionSizeOptions.map((size) => (
+                  <option key={size} value={String(size)}>
+                    {size === "all" ? "Tất cả" : `${size} câu`}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-              return (
-                <button
-                  key={size}
-                  onClick={() => handleSelectSessionSize(size)}
-                  className={`rounded-2xl border p-3 text-sm font-semibold ${
-                    isActive
-                      ? "border-blue-600 bg-blue-600 text-white shadow"
-                      : "border-slate-200 bg-white text-slate-700"
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+            <label className="block">
+              <span className="text-sm font-semibold text-slate-700">
+                Chủ điểm ngữ pháp
+              </span>
+              <select
+                value={selectedGrammarPoint}
+                onChange={(event) =>
+                  handleSelectGrammarPoint(event.target.value)
+                }
+                className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-500 focus:bg-white"
+              >
+                {grammarPointOptions.map((grammarPoint) => (
+                  <option key={grammarPoint} value={grammarPoint}>
+                    {grammarPoint}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
+
+          <p className="mt-3 text-sm text-slate-500">
+            Phiên hiện tại có {sessionQuestions.length} câu.
+          </p>
         </div>
 
         <div className="mb-5 rounded-2xl bg-green-50 p-4">
@@ -261,81 +325,98 @@ export default function PracticePage() {
           </p>
         </div>
 
-        <div className="rounded-3xl bg-white p-5 shadow">
-          <div className="mb-4 flex items-center justify-between">
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600">
-              {currentQuestion.part}
-            </span>
-
-            <span className="text-sm text-slate-500">Điểm: {score}</span>
+        {!hasQuestions ? (
+          <div className="rounded-3xl bg-white p-6 text-center shadow">
+            <h2 className="text-xl font-bold text-slate-900">
+              Chưa có câu hỏi cho chủ điểm này.
+            </h2>
+            <button
+              onClick={() => handleSelectGrammarPoint(allGrammarPointsLabel)}
+              className="mt-5 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow"
+            >
+              Chọn tất cả
+            </button>
           </div>
-
-          <h2 className="text-xl font-bold leading-relaxed text-slate-900">
-            {currentQuestion.question}
-          </h2>
-
-          <div className="mt-5 space-y-3">
-            {currentQuestion.options.map((option) => {
-              let buttonClass =
-                "w-full rounded-2xl border p-4 text-left font-medium shadow-sm ";
-
-              if (!isAnswered) {
-                buttonClass += "border-slate-200 bg-white text-slate-700";
-              } else if (option === currentQuestion.answer) {
-                buttonClass += "border-green-500 bg-green-50 text-green-700";
-              } else if (option === selectedAnswer) {
-                buttonClass += "border-red-500 bg-red-50 text-red-700";
-              } else {
-                buttonClass += "border-slate-200 bg-white text-slate-400";
-              }
-
-              return (
-                <button
-                  key={option}
-                  onClick={() => handleSelectAnswer(option)}
-                  className={buttonClass}
-                >
-                  {option}
-                </button>
-              );
-            })}
-          </div>
-
-          {isAnswered && (
-            <div className="mt-5 rounded-2xl bg-slate-50 p-4">
-              <p
-                className={`font-bold ${
-                  isCorrect ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {isCorrect ? "Chính xác!" : "Chưa đúng"}
-              </p>
-
-              <p className="mt-2 text-sm text-slate-700">
-                Đáp án đúng:{" "}
-                <span className="font-semibold">
-                  {currentQuestion.answer}
+        ) : (
+          <>
+            <div className="rounded-3xl bg-white p-5 shadow">
+              <div className="mb-4 flex items-center justify-between">
+                <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600">
+                  {currentQuestion.part}
                 </span>
-              </p>
 
-              <p className="mt-2 text-sm text-slate-600">
-                {currentQuestion.explanation}
-              </p>
+                <span className="text-sm text-slate-500">Điểm: {score}</span>
+              </div>
 
-              <p className="mt-2 text-xs text-blue-600">
-                Điểm ngữ pháp: {currentQuestion.grammarPoint}
-              </p>
+              <h2 className="text-xl font-bold leading-relaxed text-slate-900">
+                {currentQuestion.question}
+              </h2>
+
+              <div className="mt-5 space-y-3">
+                {currentQuestion.options.map((option) => {
+                  let buttonClass =
+                    "w-full rounded-2xl border p-4 text-left font-medium shadow-sm ";
+
+                  if (!isAnswered) {
+                    buttonClass += "border-slate-200 bg-white text-slate-700";
+                  } else if (option === currentQuestion.answer) {
+                    buttonClass +=
+                      "border-green-500 bg-green-50 text-green-700";
+                  } else if (option === selectedAnswer) {
+                    buttonClass += "border-red-500 bg-red-50 text-red-700";
+                  } else {
+                    buttonClass += "border-slate-200 bg-white text-slate-400";
+                  }
+
+                  return (
+                    <button
+                      key={option}
+                      onClick={() => handleSelectAnswer(option)}
+                      className={buttonClass}
+                    >
+                      {option}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {isAnswered && (
+                <div className="mt-5 rounded-2xl bg-slate-50 p-4">
+                  <p
+                    className={`font-bold ${
+                      isCorrect ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {isCorrect ? "Chính xác!" : "Chưa đúng"}
+                  </p>
+
+                  <p className="mt-2 text-sm text-slate-700">
+                    Đáp án đúng:{" "}
+                    <span className="font-semibold">
+                      {currentQuestion.answer}
+                    </span>
+                  </p>
+
+                  <p className="mt-2 text-sm text-slate-600">
+                    {currentQuestion.explanation}
+                  </p>
+
+                  <p className="mt-2 text-xs text-blue-600">
+                    Điểm ngữ pháp: {currentQuestion.grammarPoint}
+                  </p>
+                </div>
+              )}
             </div>
-          )}
-        </div>
 
-        {isAnswered && (
-          <button
-            onClick={handleNextQuestion}
-            className="mt-5 w-full rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow"
-          >
-            {isLastQuestion ? "Xem kết quả" : "Câu tiếp theo"}
-          </button>
+            {isAnswered && (
+              <button
+                onClick={handleNextQuestion}
+                className="mt-5 w-full rounded-2xl bg-blue-600 p-4 font-semibold text-white shadow"
+              >
+                {isLastQuestion ? "Xem kết quả" : "Câu tiếp theo"}
+              </button>
+            )}
+          </>
         )}
 
         <button
